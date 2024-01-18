@@ -1,0 +1,6 @@
+.Board {
+  background-color: darkslateblue;
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+}

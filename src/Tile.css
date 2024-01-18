@@ -1,0 +1,14 @@
+.Tile {
+  background-color: peachpuff;
+  padding: 10px;
+  flex: 1 0 25%;
+  box-sizing: border-box;
+  border: 1px solid darkslateblue;
+  text-align: center;
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
+.Tile:hover {
+  background-color: white;
+}
