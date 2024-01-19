@@ -6,14 +6,6 @@ import "./Board.css";
 
 function Board() {
   const _symbols = [
-    "🀥",
-    "🀥",
-    "🀤",
-    "🀤",
-    "🀣",
-    "🀣",
-    "🀢",
-    "🀢",
     "🀀",
     "🀀",
     "🀁",
@@ -22,10 +14,19 @@ function Board() {
     "🀂",
     "🀃",
     "🀃",
+    "🀥",
+    "🀥",
+    "🀤",
+    "🀤",
+    "🀣",
+    "🀣",
+    "🀢",
+    "🀢",
   ];
 
   const makeBoard = () => {
-    let randomSymbols = _symbols.sort(() => (Math.random() > 0.5 ? 1 : -1));
+    // let randomSymbols = _symbols.sort(() => (Math.random() > 0.5 ? 1 : -1));
+    let randomSymbols = shuffle(_symbols);
     return randomSymbols.map((x, i) => ({
       id: i,
       value: x,
@@ -34,9 +35,32 @@ function Board() {
     }));
   };
 
+  function shuffle(array) {
+    // Fisher–Yates shuffle implementation from
+    // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
+
   const [board, setBoard] = useState(makeBoard);
   const [score, setScore] = useState(0);
 
+  // Note: Tiles should be unclickable if two are already displayed
   const flipTile = (tileId) => {
     let b = [...board];
     let tile = { ...board[tileId], exposed: true };
@@ -63,7 +87,7 @@ function Board() {
           b2[exposedTiles[1].id] = t2;
           setBoard(b2);
         } else {
-          toast.error("FAIL!");
+          toast.error("Try Again!");
           let b2 = [...board];
           let t1 = {
             ...board[exposedTiles[0].id],
