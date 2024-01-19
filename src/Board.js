@@ -37,7 +37,12 @@ function Board() {
   return (
     <div className="Board">
       {board.map((tile) => (
-        <Tile key={tile.id} />
+        <Tile
+          key={tile.id}
+          value={tile.value}
+          exposed={tile.exposed}
+          active={tile.active}
+        />
       ))}
     </div>
   );

@@ -1,4 +1,4 @@
-.Tile {
+div[class^="Tile-"] {
   background-color: peachpuff;
   padding: 10px;
   flex: 1 0 25%;
@@ -9,6 +9,9 @@
   width: 100px;
   cursor: pointer;
 }
-.Tile:hover {
+.Tile-hidden:hover {
   background-color: white;
+}
+.Tile-dead {
+  background-color: darkgray;
 }
