@@ -6,22 +6,22 @@ import "./Board.css";
 
 function Board() {
   const _symbols = [
-    "heart",
-    "heart",
-    "spade",
-    "spade",
-    "club",
-    "club",
-    "diamond",
-    "diamond",
-    "apple",
-    "apple",
-    "mango",
-    "mango",
-    "banana",
-    "banana",
-    "orange",
-    "orange",
+    "🀥",
+    "🀥",
+    "🀤",
+    "🀤",
+    "🀣",
+    "🀣",
+    "🀢",
+    "🀢",
+    "🀀",
+    "🀀",
+    "🀁",
+    "🀁",
+    "🀂",
+    "🀂",
+    "🀃",
+    "🀃",
   ];
 
   const makeBoard = () => {
@@ -35,7 +35,7 @@ function Board() {
   };
 
   const [board, setBoard] = useState(makeBoard);
-  // const [score, setScore] = useState(0);
+  const [score, setScore] = useState(0);
 
   const flipTile = (tileId) => {
     let b = [...board];
@@ -46,7 +46,8 @@ function Board() {
       const exposedTiles = b.filter((tile) => tile.exposed);
       if (exposedTiles.length === 2) {
         if (exposedTiles[0].value === exposedTiles[1].value) {
-          toast.success("MATCH");
+          setScore(score + 1);
+          toast.success(`Match! Your score is ${score + 1}`);
           let b2 = [...board];
           let t1 = {
             ...board[exposedTiles[0].id],
@@ -96,7 +97,7 @@ function Board() {
       ))}
       <ToastContainer
         position="bottom-left"
-        autoClose={3000}
+        autoClose={2400}
         newestOnTop={false}
         closeOnClick={true}
         draggable
