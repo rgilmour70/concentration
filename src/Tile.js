@@ -2,6 +2,10 @@ import React from "react";
 import "./Tile.css";
 
 function Tile(props) {
+  const handleClick = (e) => {
+    props.flipTile(e.target.id);
+  };
+
   return (
     <div
       className={
@@ -11,8 +15,10 @@ function Tile(props) {
           ? "Tile-exposed"
           : "Tile-hidden"
       }
+      onClick={handleClick}
+      id={props.id}
     >
-      {!props.active ? "DEAD" : props.exposed ? props.value : ""}
+      {props.active && props.value}
     </div>
   );
 }

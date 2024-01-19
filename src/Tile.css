@@ -1,17 +1,25 @@
 div[class^="Tile-"] {
   background-color: peachpuff;
+  color: peachpuff;
   padding: 10px;
   flex: 1 0 25%;
   box-sizing: border-box;
-  border: 1px solid darkslateblue;
+  border: 1px solid darkgray;
   text-align: center;
   height: 100px;
   width: 100px;
   cursor: pointer;
+  transition: background-color 2s;
 }
-.Tile-hidden:hover {
+/* .Tile-hidden:hover {
   background-color: white;
-}
+  color: white;
+} */
 .Tile-dead {
-  background-color: darkgray;
+  background-color: darkslateblue !important;
+  color: darkslateblue !important;
+}
+.Tile-exposed {
+  background-color: pink !important;
+  color: #111 !important;
 }
