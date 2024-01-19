@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Tile from "./Tile";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Board.css";
 
 function Board() {
@@ -44,7 +46,7 @@ function Board() {
       const exposedTiles = b.filter((tile) => tile.exposed);
       if (exposedTiles.length === 2) {
         if (exposedTiles[0].value === exposedTiles[1].value) {
-          console.log("MATCH!");
+          toast.success("MATCH");
           let b2 = [...board];
           let t1 = {
             ...board[exposedTiles[0].id],
@@ -60,7 +62,7 @@ function Board() {
           b2[exposedTiles[1].id] = t2;
           setBoard(b2);
         } else {
-          console.log("FAIL!");
+          toast.error("FAIL!");
           let b2 = [...board];
           let t1 = {
             ...board[exposedTiles[0].id],
@@ -92,6 +94,15 @@ function Board() {
           flipTile={flipTile}
         />
       ))}
+      <ToastContainer
+        position="bottom-left"
+        autoClose={3000}
+        newestOnTop={false}
+        closeOnClick={true}
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
