@@ -3,7 +3,9 @@ import "./Tile.css";
 
 function Tile(props) {
   const handleClick = (e) => {
-    props.flipTile(e.target.id);
+    if (!props.boardIsFrozen) {
+      props.flipTile(e.target.id);
+    }
   };
 
   return (

@@ -59,6 +59,7 @@ function Board() {
 
   const [board, setBoard] = useState(makeBoard);
   const [score, setScore] = useState(0);
+  const [frozen, setFrozen] = useState(false);
 
   // Note: Tiles should be unclickable if two are already displayed
   const flipTile = (tileId) => {
@@ -66,12 +67,19 @@ function Board() {
     let tile = { ...board[tileId], exposed: true };
     b[tileId] = tile;
     setBoard(b);
+    const exposedTiles = b.filter((tile) => tile.exposed);
+    console.log(exposedTiles);
+    if (exposedTiles.length === 2) {
+      setFrozen(true);
+    }
     setTimeout(() => {
-      const exposedTiles = b.filter((tile) => tile.exposed);
       if (exposedTiles.length === 2) {
         if (exposedTiles[0].value === exposedTiles[1].value) {
           setScore(score + 1);
-          toast.success(`Match! Your score is ${score + 1}`);
+          // toast.success(`Match! Your score is ${score + 1}`);
+          toast.success(`Match! Your score is ${score + 1}`, {
+            onClose: () => setFrozen(false),
+          });
           let b2 = [...board];
           let t1 = {
             ...board[exposedTiles[0].id],
@@ -87,7 +95,8 @@ function Board() {
           b2[exposedTiles[1].id] = t2;
           setBoard(b2);
         } else {
-          toast.error("Try Again!");
+          // toast.error("Try Again!");
+          toast.error("Try Again!", { onClose: () => setFrozen(false) });
           let b2 = [...board];
           let t1 = {
             ...board[exposedTiles[0].id],
@@ -117,11 +126,12 @@ function Board() {
           exposed={tile.exposed}
           active={tile.active}
           flipTile={flipTile}
+          boardIsFrozen={frozen}
         />
       ))}
       <ToastContainer
         position="bottom-left"
-        autoClose={2400}
+        autoClose={2000}
         newestOnTop={false}
         closeOnClick={true}
         draggable
