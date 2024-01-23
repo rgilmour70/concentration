@@ -53,7 +53,6 @@ function Board() {
         array[currentIndex],
       ];
     }
-
     return array;
   }
 
@@ -76,10 +75,13 @@ function Board() {
       if (exposedTiles.length === 2) {
         if (exposedTiles[0].value === exposedTiles[1].value) {
           setScore(score + 1);
-          // toast.success(`Match! Your score is ${score + 1}`);
-          toast.success(`Match! Your score is ${score + 1}`, {
-            onClose: () => setFrozen(false),
-          });
+          if (score === 7) {
+            toast.success("You Win!");
+          } else {
+            toast.success(`Match! Your score is ${score + 1}`, {
+              onClose: () => setFrozen(false),
+            });
+          }
           let b2 = [...board];
           let t1 = {
             ...board[exposedTiles[0].id],
@@ -95,7 +97,6 @@ function Board() {
           b2[exposedTiles[1].id] = t2;
           setBoard(b2);
         } else {
-          // toast.error("Try Again!");
           toast.error("Try Again!", { onClose: () => setFrozen(false) });
           let b2 = [...board];
           let t1 = {
